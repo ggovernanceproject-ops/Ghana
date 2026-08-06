@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghana — A Lookbook of the Gold Coast</title>
+<style>
+  :root{
+    --forest:#0E4D34;
+    --forest-dark:#0A3626;
+    --gold:#F2B705;
+    --faded-gold:#D9A63A;
+    --terracotta:#B5471B;
+    --clay:#8C3A16;
+    --ink:#1B1812;
+    --ivory:#EDE6D6;
+    --cream:#F1EBDD;
+    --muted:#8b8471;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif;
+  }
+  .sans{font-family:Verdana,Geneva,sans-serif;}
+  .eyebrow{
+    font-family:Verdana,Geneva,sans-serif;
+    font-size:11px;
+    letter-spacing:3px;
+    font-weight:bold;
+    text-transform:uppercase;
+  }
+
+  header.hero{
+    position:relative;
+    min-height:100vh;
+    background:var(--forest-dark);
+    color:var(--ivory);
+    display:flex;
+    align-items:stretch;
+    overflow:hidden;
+  }
+  .hero-main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:6vw;
+  }
+  .hero-strip{
+    width:9%;
+    min-width:70px;
+    display:flex;
+    flex-direction:column;
+  }
+  .hero-strip img, .hero-strip .animation {
+    flex:1;
+    object-fit:cover;
+    display:block;
+    width:100%;
+    height:100%;
+  }
+  .hero h1{
+    font-size:clamp(60px,11vw,140px);
+    margin:0;
+    line-height:0.9;
+    letter-spacing:1px;
+    animation:fadeUp 1s ease-out both;
+  }
+  .hero .eyebrow{color:var(--gold); margin-bottom:18px; animation:fadeUp 1s ease-out .15s both;}
+  .hero p.sub{
+    font-size:clamp(15px,1.6vw,19px);
+    font-style:italic;
+    max-width:520px;
+    margin-top:22px;
+    color:var(--ivory);
+    animation:fadeUp 1s ease-out .3s both;
+  }
+  .hero .edition{
+    margin-top:60px;
+    color:var(--faded-gold);
+    animation:fadeUp 1s ease-out .45s both;
+  }
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(16px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:28px;
+    left:6vw;
+    font-family:Verdana,sans-serif;
+    font-size:11px;
+    letter-spacing:2px;
+    color:var(--faded-gold);
+  }
+
+  section.intro{
+    display:flex;
+    min-height:70vh;
+    flex-wrap:wrap;
+  }
+  .intro-left{
+    background:var(--forest);
+    color:var(--ivory);
+    flex:1 1 340px;
+    padding:70px 50px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .intro-left h2{font-size:52px; margin:0 0 14px;}
+  .intro-left p{color:var(--gold); font-style:italic; max-width:320px;}
+  .intro-right{
+    flex:2 1 480px;
+    padding:70px 60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:26px;
+  }
+  .intro-right h3{font-size:26px; margin:0 0 6px;}
+  .intro-right p{font-family:Verdana,sans-serif; font-size:14.5px; line-height:1.6; color:#3a3527; max-width:640px;}
+  .facts{
+    display:flex; gap:16px; flex-wrap:wrap; margin-top:10px;
+  }
+  .fact{
+    border:1px solid var(--gold);
+    background:var(--cream);
+    padding:14px 18px;
+    min-width:120px;
+  }
+  .fact .k{font-family:Verdana,sans-serif; font-size:9.5px; letter-spacing:1.5px; color:var(--terracotta); font-weight:bold;}
+  .fact .v{font-family:Verdana,sans-serif; font-weight:bold; font-size:14px; margin-top:6px;}
+
+  .regions{
+    background:var(--ink);
+    color:var(--ivory);
+    padding:80px 6vw;
+  }
+  .regions h2{font-size:38px; margin:0 0 6px;}
+  .regions .eyebrow-sub{font-family:Georgia,serif; font-style:italic; color:var(--gold); font-size:15px; margin-bottom:40px;}
+  .region-row{
+    display:flex;
+    align-items:center;
+    gap:26px;
+    padding:20px 0;
+    border-bottom:1px solid #2a2620;
+  }
+  .region-row:last-child{border-bottom:none;}
+  .region-bar{width:10px; height:46px; flex-shrink:0;}
+  .region-row h4{font-size:20px; margin:0; width:230px; flex-shrink:0;}
+  .region-row p{font-family:Verdana,sans-serif; font-size:13.5px; color:#c9c2b2; margin:0;}
+
+  .stop{
+    display:flex;
+    min-height:78vh;
+    flex-wrap:wrap;
+  }
+  .stop-visual{
+    flex:1 1 360px;
+    position:relative;
+    overflow:hidden;
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:flex-end;
+    justify-content:flex-start;
+    padding:40px;
+    background-color:var(--forest-dark);
+  }
+  .stop-visual::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.25);
+    z-index:1;
+  }
+  .stop-visual img,
+  .stop-visual .animation-container {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+  }
+  .stop-visual .animation-container {
+    object-fit: contain;
+  }
+  .stop-visual h3{
+    font-size:36px;
+    margin:0;
+    line-height:1.1;
+    position:relative;
+    z-index:2;
+    color:#fff;
+    text-shadow:0 2px 8px rgba(0,0,0,0.4);
+  }
+  .stop-content{
+    flex:1 1 400px;
+    padding:50px 60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    background:var(--ivory);
+  }
+  .stop-content.dark{
+    background:var(--ink);
+  }
+  .stop .subtitle{
+    font-size:22px;
+    font-weight:bold;
+    margin:10px 0 30px;
+  }
+  .stop .subtitle.ivory{color:var(--ivory);}
+  .point{
+    border-left:3px solid var(--gold);
+    padding-left:20px;
+    margin-bottom:22px;
+  }
+  .point b{color:var(--ink);}
+  .point span{
+    display:block;
+    font-family:Verdana,sans-serif;
+    font-size:13.5px;
+    line-height:1.6;
+    color:#6b6556;
+    margin-top:4px;
+  }
+  .point.light{border-color:rgba(255,255,255,0.3);}
+  .point.light b{color:var(--ivory);}
+  .point.light span{color:#c9c2b2;}
+
+  .plan{
+    background:var(--ink);
+    color:var(--ivory);
+    padding:80px 6vw;
+  }
+  .plan h2{font-size:38px; margin:0 0 50px;}
+  .plan-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:30px;
+    margin-bottom:40px;
+  }
+  .plan-card{
+    border-top:3px solid var(--gold);
+    padding:30px 0;
+  }
+  .plan-card h4{font-size:18px; margin:15px 0 8px; font-weight:bold;}
+  .plan-card p{font-family:Verdana,sans-serif; font-size:14px; color:#c9c2b2; margin:0;}
+  .plan .closing{
+    text-align:center;
+    font-style:italic;
+    color:var(--gold);
+    font-size:16px;
+    margin-top:50px;
+  }
+
+  footer{
+    text-align:center;
+    padding:30px;
+    background:var(--forest-dark);
+    color:var(--ivory);
+    font-family:Verdana,sans-serif;
+    font-size:11px;
+    letter-spacing:2px;
+  }
+
+  a{
+    color:var(--gold);
+    text-decoration:underline;
+  }
+
+  ::selection{background:var(--gold); color:var(--ink);}
+
+  .animation-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(242, 183, 5, 0.9);
+    color: #333;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    z-index: 3;
+  }
+
+  @media (max-width:768px){
+    .stop{flex-direction:column-reverse;}
+    .stop[data-order="normal"] .stop-visual{order:0;}
+    .stop[data-order="normal"] .stop-content{order:1;}
+    .stop[data-order="reversed"] .stop-visual{order:1;}
+    .stop[data-order="reversed"] .stop-content{order:0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-strip" id="heroKente">
+    <!-- Hero animations will load here -->
+    <div style="background:var(--gold)"></div>
+    <div style="background:var(--terracotta)"></div>
+    <div style="background:var(--forest)"></div>
+    <div style="background:var(--gold)"></div>
+    <div style="background:var(--clay)"></div>
+  </div>
+  <div class="hero-main">
+    <div class="eyebrow">A LOOKBOOK OF THE GOLD COAST</div>
+    <h1>GHANA</h1>
+    <p class="sub">Castles, canopy walks, kente looms, and the warmest welcome in West Africa.</p>
+    <div class="eyebrow edition">2026 EDITION</div>
+  </div>
+  <div class="scroll-cue">SCROLL ↓</div>
+</header>
+
+<section class="intro">
+  <div class="intro-left">
+    <h2>Akwaaba.</h2>
+    <p>The word Ghanaians use to say welcome — and mean it.</p>
+  </div>
+  <div class="intro-right">
+    <div>
+      <h3>Why Ghana, why now</h3>
+      <p>Ghana is West Africa's most accessible entry point — stable, English-speaking, and welcoming, with a growing "Year of Return" pilgrimage drawing the diaspora home.</p>
+    </div>
+    <p>In one trip: 500-year-old coastal fortresses, rainforest canopy walks, savanna elephants, kente-weaving villages, and some of the region's best-kept beaches. This lookbook moves coast to savanna — Cape Coast, Accra, Kumasi, Mole — as a route you can actually drive.</p>
+    <div class="facts">
+      <div class="fact"><div class="k">CAPITAL</div><div class="v">Accra</div></div>
+      <div class="fact"><div class="k">LANGUAGE</div><div class="v">English + local</div></div>
+      <div class="fact"><div class="k">CURRENCY</div><div class="v">Ghana Cedi (GHS)</div></div>
+      <div class="fact"><div class="k">BEST TIME</div><div class="v">Nov – Mar</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="regions">
+  <h2>Five regions, one route</h2>
+  <div class="eyebrow-sub">Coast to savanna, roughly north–south — the classic Ghana circuit.</div>
+  <div class="region-row"><div class="region-bar" style="background:var(--forest)"></div><h4>Greater Accra</h4><p>Capital energy: Jamestown, Osu, art & nightlife</p></div>
+  <div class="region-row"><div class="region-bar" style="background:var(--terracotta)"></div><h4>Central Region</h4><p>Cape Coast & Elmina castles, Kakum canopy walk</p></div>
+  <div class="region-row"><div class="region-bar" style="background:var(--gold)"></div><h4>Ashanti Region</h4><p>Kumasi, Manhyia Palace, kente-weaving villages</p></div>
+  <div class="region-row"><div class="region-bar" style="background:var(--clay)"></div><h4>Volta Region</h4><p>Waterfalls, Lake Volta, mountain hikes</p></div>
+  <div class="region-row"><div class="region-bar" style="background:var(--faded-gold)"></div><h4>Northern Region</h4><p>Mole National Park safari, Larabanga Mosque</p></div>
+</section>
+
+<!-- STOPS (dynamically loaded with animations) -->
+<div id="stopsContainer"></div>
+
+<section class="plan">
+  <h2>Plan your trip</h2>
+  <div class="plan-grid">
+    <div class="plan-card"><h4>Best time to visit</h4><p>November–March: dry season, cooler nights, easiest travel between regions.</p></div>
+    <div class="plan-card"><h4>Getting around</h4><p>Domestic flights Accra–Kumasi–Tamale save time; road trips reveal the most.</p></div>
+    <div class="plan-card"><h4>Entry</h4><p>Most visitors need a visa or e-visa in advance — apply at least a few weeks ahead.</p></div>
+    <div class="plan-card"><h4>Suggested route</h4><p>Accra → Cape Coast → Kakum → Kumasi → Mole, 10–14 days end to end.</p></div>
+  </div>
+  <p class="closing">Akwaaba — see you on the coast.</p>
+</section>
+
+<footer>GHANA · A LOOKBOOK OF THE GOLD COAST · 2026</footer>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+
+<script>
+// ============================================================
+// FIREBASE CONFIG
+// ============================================================
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// ============================================================
+// STOP CONFIGURATION
+// ============================================================
+const STOPS = [
+  {
+    key: 'castles',
+    title: 'Castles of<br>Memory',
+    order: 'normal',
+    eyebrow: 'CENTRAL REGION',
+    eyebrow_color: 'terracotta',
+    subtitle: 'Cape Coast & Elmina Castles',
+    points: [
+      { title: 'UNESCO World Heritage', desc: 'Two of the largest of over 40 fortifications along Ghana\'s coast, built by European traders from the 15th century on.' },
+      { title: 'The Door of No Return', desc: 'A profoundly moving stop for understanding the trans-Atlantic slave trade and the diaspora\'s roots.' },
+      { title: 'Pair it with', desc: 'A walk through Cape Coast\'s fishing harbor at dawn, when the wooden boats come in.' }
+    ]
+  },
+  {
+    key: 'canopy',
+    title: 'Walk Among<br>Giants',
+    order: 'reversed',
+    eyebrow: 'CENTRAL REGION',
+    eyebrow_color: 'forest',
+    subtitle: 'Kakum National Park Canopy Walkway',
+    light_points: true,
+    dark_bg: true,
+    points: [
+      { title: 'Seven rope bridges', desc: 'Suspended up to 40 meters above the rainforest floor — Ghana\'s most photographed adventure.' },
+      { title: 'Wildlife', desc: 'Home to forest elephants, over 300 bird species, and Diana monkeys (best spotted at sunrise).' },
+      { title: 'Good to know', desc: 'Arrive early — the walkway gets busy and hot by mid-morning.' }
+    ]
+  },
+  {
+    key: 'accra',
+    title: 'The Capital\'s<br>Pulse',
+    order: 'normal',
+    eyebrow: 'GREATER ACCRA',
+    eyebrow_color: 'terracotta',
+    subtitle: 'Accra: Jamestown to Osu',
+    points: [
+      { title: 'Jamestown', desc: 'Colorful colonial-era fishing quarter, boxing gyms, and a lighthouse with sweeping coastal views.' },
+      { title: 'Independence Square & Kwame Nkrumah Mausoleum', desc: 'The monumental heart of Ghana\'s 1957 independence — first in sub-Saharan Africa.' },
+      { title: 'Osu & Accra\'s art scene', desc: 'Galleries, live highlife music, and the city\'s best chop bars and rooftop bars.' }
+    ]
+  },
+  {
+    key: 'kumasi',
+    title: 'Seat of a<br>Kingdom',
+    order: 'reversed',
+    eyebrow: 'ASHANTI REGION',
+    eyebrow_color: 'faded-gold',
+    subtitle: 'Kumasi & the Ashanti Heartland',
+    light_points: true,
+    dark_bg: true,
+    points: [
+      { title: 'Manhyia Palace', desc: 'Home of the Asantehene, spiritual and cultural seat of the Ashanti Kingdom.' },
+      { title: 'Bonwire', desc: 'The kente-weaving village where the iconic strip-woven cloth originated — watch looms in motion.' },
+      { title: 'Kejetia Market', desc: 'One of West Africa\'s largest markets — a sensory deep-dive into daily Ghanaian life.' }
+    ]
+  },
+  {
+    key: 'savanna',
+    title: 'Into the<br>Savanna',
+    order: 'normal',
+    eyebrow: 'NORTHERN REGION',
+    eyebrow_color: 'terracotta',
+    subtitle: 'Mole National Park',
+    points: [
+      { title: 'Ghana\'s largest wildlife refuge', desc: 'Walking safaris that bring you close to elephants, antelope, and baboons — rare on foot in Africa.' },
+      { title: 'Larabanga Mosque', desc: 'A striking Sudanese-style mud-and-timber mosque, among West Africa\'s oldest.' },
+      { title: 'Getting there', desc: 'A long but worthwhile drive north — best combined with an overnight at the park motel.' }
+    ]
+  },
+  {
+    key: 'beaches',
+    title: 'Where the Coast<br>Slows Down',
+    order: 'reversed',
+    eyebrow: 'COASTLINE',
+    eyebrow_color: 'forest',
+    subtitle: 'Beaches: Busua, Anomabo & Ada',
+    light_points: true,
+    dark_bg: true,
+    points: [
+      { title: 'Busua', desc: 'Ghana\'s laid-back surf town — board rentals, beach bars, and reliable swells.' },
+      { title: 'Anomabo', desc: 'Boutique beach lodges beside a working fishing village, close to Cape Coast.' },
+      { title: 'Ada Foah', desc: 'Where the Volta River meets the Atlantic — kayaking, river islands, and sandbar sunsets.' }
+    ]
+  },
+  {
+    key: 'culture',
+    title: 'Rhythm, Cloth,<br>Symbol',
+    order: 'normal',
+    eyebrow: 'CULTURE',
+    eyebrow_color: 'terracotta',
+    subtitle: 'Festivals & Living Traditions',
+    points: [
+      { title: 'Homowo & Panafest', desc: 'Harvest festivals and the biennial Pan-African Historical Theatre Festival draw the diaspora each year.' },
+      { title: 'Adinkra symbols', desc: 'Visual proverbs — stamped onto cloth — that encode Akan philosophy in a single mark.' },
+      { title: 'Drumming & dance', desc: 'Adowa, kpanlogo, and talking drums remain part of everyday celebration, not performance for tourists.' }
+    ]
+  },
+  {
+    key: 'food',
+    title: 'Eat Like<br>a Local',
+    order: 'reversed',
+    eyebrow: 'FLAVOR',
+    eyebrow_color: 'faded-gold',
+    subtitle: 'The Ghanaian Table',
+    light_points: true,
+    dark_bg: true,
+    points: [
+      { title: 'Jollof rice', desc: 'The dish behind West Africa\'s friendliest culinary rivalry — try Ghana\'s smoky version and judge yourself.' },
+      { title: 'Banku & grilled tilapia', desc: 'Fermented corn-and-cassava dough, best eaten by hand with a fiery pepper sauce.' },
+      { title: 'Kelewele & red red', desc: 'Spiced fried plantain, and a black-eyed-pea stew fried in palm oil — street food royalty.' }
+    ]
+  }
+];
+
+// ============================================================
+// RENDER STOPS
+// ============================================================
+async function loadAnimatedStops() {
+  try {
+    const doc = await db.collection('lookbook-content').doc('animations').get();
+    const animData = doc.data() || {};
+    
+    const container = document.getElementById('stopsContainer');
+    container.innerHTML = '';
+    
+    STOPS.forEach((stop, idx) => {
+      const stopAnimData = animData[stop.key] || {};
+      const section = document.createElement('section');
+      section.className = 'stop';
+      section.setAttribute('data-order', stop.order);
+      section.style.background = stop.dark_bg ? 'var(--ink)' : 'var(--ivory)';
+      
+      // Determine what to display for the visual
+      const gifUrl = stopAnimData.gif_url;
+      const staticImageUrl = stopAnimData.image_urls ? stopAnimData.image_urls[0] : '';
+      const animationType = stopAnimData.animation_type || 'static';
+      
+      // Visual side
+      const visualDiv = document.createElement('div');
+      visualDiv.className = 'stop-visual';
+      visualDiv.id = `stop-${stop.key}`;
+      
+      if (gifUrl) {
+        // Display animated GIF
+        const img = document.createElement('img');
+        img.src = gifUrl;
+        img.alt = stop.title;
+        img.className = 'animation-container';
+        visualDiv.appendChild(img);
+        
+        // Animation badge
+        const badge = document.createElement('div');
+        badge.className = 'animation-badge';
+        const badgeMap = {
+          'carousel': '📽️ Carousel',
+          'social': '📱 Social',
+          'transitions': '🔄 Transitions',
+          'hero_stripe': '🎬 Hero'
+        };
+        badge.textContent = badgeMap[animationType] || 'Animated';
+        visualDiv.appendChild(badge);
+      } else if (staticImageUrl) {
+        // Fallback to static image
+        const img = document.createElement('img');
+        img.src = staticImageUrl;
+        img.alt = stop.title;
+        visualDiv.appendChild(img);
+      } else {
+        // Placeholder
+        visualDiv.style.background = 'var(--forest-dark)';
+      }
+      
+      // Add title
+      const title = document.createElement('h3');
+      title.innerHTML = stop.title;
+      visualDiv.appendChild(title);
+      
+      // Content side
+      const contentDiv = document.createElement('div');
+      contentDiv.className = `stop-content ${stop.dark_bg ? 'dark' : ''}`;
+      contentDiv.innerHTML = `
+        <div class="eyebrow" style="color:var(--${stop.eyebrow_color})">${stop.eyebrow}</div>
+        <p class="subtitle ${stop.light_points ? 'ivory' : ''}">${stop.subtitle}</p>
+        ${stop.points.map(p => `
+          <div class="point ${stop.light_points ? 'light' : ''}">
+            <b>${p.title}</b>
+            <span>${p.desc}</span>
+          </div>
+        `).join('')}
+      `;
+      
+      section.appendChild(visualDiv);
+      section.appendChild(contentDiv);
+      container.appendChild(section);
+    });
+    
+  } catch (error) {
+    console.error('Error loading animations:', error);
+  }
+}
+
+// Load on page load
+document.addEventListener('DOMContentLoaded', loadAnimatedStops);
+
+// Listen for real-time updates
+db.collection('lookbook-content').doc('animations').onSnapshot(() => {
+  loadAnimatedStops();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghana Lookbook — Admin Dashboard</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  header {
+    background: #0A3626;
+    color: #fff;
+    padding: 30px 20px;
+    margin: -20px -20px 30px;
+    text-align: center;
+  }
+  header h1 { margin: 0; font-size: 28px; }
+  header .subtitle { font-size: 14px; opacity: 0.9; margin-top: 5px; }
+  
+  .auth-section {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .hidden { display: none !important; }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="text"]:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #0A3626;
+    box-shadow: 0 0 0 2px rgba(10, 54, 38, 0.1);
+  }
+  
+  button {
+    background: #0A3626;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  
+  button:hover {
+    background: #082a1f;
+  }
+  
+  button.secondary {
+    background: #666;
+  }
+  
+  button.secondary:hover {
+    background: #555;
+  }
+  
+  button.animation {
+    background: #1976d2;
+    flex: 1;
+    min-height: 60px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  
+  button.animation:hover {
+    background: #1565c0;
+  }
+  
+  button.animation.active {
+    background: #F2B705;
+    color: #333;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .message {
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+  
+  .message.success {
+    background: #c8e6c9;
+    color: #1b5e20;
+    border: 1px solid #81c784;
+  }
+  
+  .message.error {
+    background: #ffcdd2;
+    color: #b71c1c;
+    border: 1px solid #ef5350;
+  }
+  
+  .message.info {
+    background: #bbdefb;
+    color: #0d47a1;
+    border: 1px solid #64b5f6;
+  }
+  
+  .edit-section {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .edit-section h2 {
+    margin: 0 0 20px;
+    font-size: 20px;
+    color: #0A3626;
+    border-bottom: 2px solid #F2B705;
+    padding-bottom: 12px;
+  }
+  
+  .section-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .stop-card {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .stop-card label {
+    margin-bottom: 12px;
+  }
+  
+  .image-input-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .image-input-group input {
+    flex: 1;
+  }
+  
+  .image-input-group button {
+    flex: 0 0 auto;
+    min-width: 80px;
+  }
+  
+  .animation-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f0f7ff;
+    border-radius: 4px;
+    border: 1px solid #64b5f6;
+  }
+  
+  .animation-option {
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.2s;
+  }
+  
+  .animation-option:hover {
+    border-color: #1976d2;
+    background: #f0f7ff;
+  }
+  
+  .animation-option.selected {
+    border-color: #F2B705;
+    background: #fffbf0;
+  }
+  
+  .animation-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  
+  .animation-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: #0A3626;
+  }
+  
+  .animation-desc {
+    font-size: 11px;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .image-preview {
+    margin-top: 10px;
+  }
+  
+  .image-preview img {
+    max-width: 150px;
+    max-height: 120px;
+    border-radius: 4px;
+  }
+  
+  .timestamp {
+    font-size: 12px;
+    color: #999;
+    margin-top: 15px;
+    text-align: right;
+  }
+  
+  .section-info {
+    background: #fff3e0;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border-left: 4px solid #ff9800;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  
+  .animation-preview {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 4px;
+    margin-top: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    .animation-selector {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .section-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Ghana Lookbook Admin</h1>
+  <div class="subtitle">Manage animations & content</div>
+</header>
+
+<div class="container">
+  
+  <!-- AUTH SECTION -->
+  <div class="auth-section" id="authSection">
+    <div id="authStatus" style="font-size: 14px; margin-bottom: 15px; color: #d32f2f;">
+      🔒 Not logged in
+    </div>
+    
+    <div id="loginForm">
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="your@email.com">
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••">
+      </div>
+      <button onclick="handleLogin()">Sign In</button>
+    </div>
+    
+    <div id="logoutForm" class="hidden">
+      <p id="userEmail" style="margin: 0 0 15px;"></p>
+      <button class="secondary" onclick="handleLogout()">Sign Out</button>
+    </div>
+  </div>
+  
+  <div id="message" class="message hidden"></div>
+  
+  <!-- EDIT SECTION (hidden until logged in) -->
+  <div id="editSection" class="hidden">
+    
+    <!-- ANIMATION TYPE SELECTOR -->
+    <div class="edit-section">
+      <h2>🎨 Choose Animation Style</h2>
+      <div class="section-info">
+        💡 Select how you want to animate this update. Each stop can use a different style!
+      </div>
+      
+      <div class="animation-selector">
+        <div class="animation-option" onclick="selectAnimation('carousel')" id="anim-carousel">
+          <div class="animation-icon">📽️</div>
+          <div class="animation-name">Carousel</div>
+          <div class="animation-desc">Multiple images fade & loop</div>
+        </div>
+        
+        <div class="animation-option" onclick="selectAnimation('social')" id="anim-social">
+          <div class="animation-icon">📱</div>
+          <div class="animation-name">Social Media</div>
+          <div class="animation-desc">15-sec shareable GIF</div>
+        </div>
+        
+        <div class="animation-option" onclick="selectAnimation('transitions')" id="anim-transitions">
+          <div class="animation-icon">🔄</div>
+          <div class="animation-name">Transitions</div>
+          <div class="animation-desc">Smooth section flow</div>
+        </div>
+        
+        <div class="animation-option" onclick="selectAnimation('hero_stripe')" id="anim-hero">
+          <div class="animation-icon">🎬</div>
+          <div class="animation-name">Hero Stripe</div>
+          <div class="animation-desc">Animated kente pattern</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- STOP SECTIONS WITH ANIMATION -->
+    <div class="edit-section">
+      <h2>Stop Sections</h2>
+      <div id="stopFields"></div>
+      <div class="button-group">
+        <button onclick="saveAnimations()" style="flex: 1;">✨ Save All Changes</button>
+        <button class="secondary" onclick="generateGIFs()" style="flex: 1;">🎞️ Generate GIFs</button>
+      </div>
+    </div>
+    
+    <div class="timestamp">
+      Last updated: <span id="lastUpdated">—</span>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+
+<!-- Cloudinary Upload Widget -->
+<script src="https://upload-widget.cloudinary.com/latest/index.js"></script>
+
+<script>
+// ============================================================
+// FIREBASE CONFIG
+// ============================================================
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+// CLOUDINARY CONFIG
+const CLOUDINARY_CLOUD_NAME = "YOUR_CLOUDINARY_CLOUD_NAME";
+const CLOUDINARY_UPLOAD_PRESET = "YOUR_UPLOAD_PRESET";
+
+// ============================================================
+// ANIMATION TYPES
+// ============================================================
+const ANIMATION_TYPES = {
+  carousel: {
+    icon: '📽️',
+    name: 'Carousel',
+    desc: 'Multiple images fade & loop (3-5 images)',
+    requires_multiple: true
+  },
+  social: {
+    icon: '📱',
+    name: 'Social Media',
+    desc: '15-second shareable GIF for Instagram/Twitter',
+    requires_multiple: true
+  },
+  transitions: {
+    icon: '🔄',
+    name: 'Transitions',
+    desc: 'Smooth dissolve between sections',
+    requires_multiple: true
+  },
+  hero_stripe: {
+    icon: '🎬',
+    name: 'Hero Stripe',
+    desc: 'Animated kente pattern (no images needed)',
+    requires_multiple: false
+  }
+};
+
+const STOP_NAMES = {
+  castles: 'Castles of Memory',
+  canopy: 'Walk Among Giants',
+  accra: "The Capital's Pulse",
+  kumasi: 'Seat of a Kingdom',
+  savanna: 'Into the Savanna',
+  beaches: 'Where the Coast Slows Down',
+  culture: 'Rhythm, Cloth, Symbol',
+  food: 'Eat Like a Local'
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let selectedAnimation = 'carousel';
+let currentStopData = {};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// ============================================================
+// AUTH
+// ============================================================
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById('loginForm').classList.add('hidden');
+    document.getElementById('logoutForm').classList.remove('hidden');
+    document.getElementById('userEmail').textContent = `Logged in as: ${user.email}`;
+    document.getElementById('authStatus').textContent = '✅ Logged in';
+    document.getElementById('authStatus').style.color = '#388e3c';
+    document.getElementById('editSection').classList.remove('hidden');
+    loadAnimations();
+  } else {
+    document.getElementById('loginForm').classList.remove('hidden');
+    document.getElementById('logoutForm').classList.add('hidden');
+    document.getElementById('authStatus').textContent = '🔒 Not logged in';
+    document.getElementById('authStatus').style.color = '#d32f2f';
+    document.getElementById('editSection').classList.add('hidden');
+  }
+});
+
+function handleLogin() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  
+  if (!email || !password) {
+    showMessage('Please enter email and password', 'error');
+    return;
+  }
+  
+  auth.signInWithEmailAndPassword(email, password)
+    .catch(error => showMessage(error.message, 'error'));
+}
+
+function handleLogout() {
+  auth.signOut();
+}
+
+// ============================================================
+// ANIMATION SELECTOR
+// ============================================================
+function selectAnimation(type) {
+  selectedAnimation = type;
+  
+  // Update UI
+  document.querySelectorAll('.animation-option').forEach(el => {
+    el.classList.remove('selected');
+  });
+  document.getElementById(`anim-${type}`).classList.add('selected');
+  
+  showMessage(`✨ Selected: ${ANIMATION_TYPES[type].name}`, 'info');
+}
+
+// ============================================================
+// LOAD ANIMATIONS
+// ============================================================
+async function loadAnimations() {
+  try {
+    const doc = await db.collection('lookbook-content').doc('animations').get();
+    
+    const data = doc.exists ? doc.data() : {};
+    
+    // Set default animation
+    if (data.selectedAnimation) {
+      selectedAnimation = data.selectedAnimation;
+      document.getElementById(`anim-${selectedAnimation}`).classList.add('selected');
+    } else {
+      document.getElementById('anim-carousel').classList.add('selected');
+    }
+    
+    // Load stop data
+    const stopsContainer = document.getElementById('stopFields');
+    stopsContainer.innerHTML = '';
+    
+    Object.entries(STOP_NAMES).forEach(([key, name]) => {
+      const stopData = data[key] || {};
+      const card = createStopCard(key, name, stopData);
+      stopsContainer.appendChild(card);
+    });
+    
+    if (data.lastUpdated) {
+      const date = new Date(data.lastUpdated.toDate()).toLocaleString();
+      document.getElementById('lastUpdated').textContent = date;
+    }
+  } catch (error) {
+    showMessage(`Error loading: ${error.message}`, 'error');
+  }
+}
+
+// ============================================================
+// CREATE STOP CARD
+// ============================================================
+function createStopCard(key, name, stopData) {
+  const div = document.createElement('div');
+  div.className = 'stop-card';
+  div.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <label style="margin: 0;">${name}</label>
+      <select class="animation-type-select" data-stop="${key}" style="width: auto; flex: 0;">
+        <option value="carousel" ${(stopData.animation_type === 'carousel' ? 'selected' : '')}>📽️ Carousel</option>
+        <option value="social" ${(stopData.animation_type === 'social' ? 'selected' : '')}>📱 Social</option>
+        <option value="transitions" ${(stopData.animation_type === 'transitions' ? 'selected' : '')}>🔄 Transitions</option>
+        <option value="hero_stripe" ${(stopData.animation_type === 'hero_stripe' ? 'selected' : '')}>🎬 Hero</option>
+      </select>
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+      <label>Images (${ANIMATION_TYPES[stopData.animation_type || 'carousel'].requires_multiple ? 'multiple' : 'optional'})</label>
+      <div id="images-${key}" style="display: flex; flex-direction: column; gap: 8px;">
+        ${(stopData.image_urls || []).map((url, idx) => `
+          <div style="display: flex; gap: 8px;">
+            <input type="text" value="${url}" class="stop-image-input" data-stop="${key}" data-idx="${idx}" placeholder="Image URL">
+            <button onclick="removeImageUrl('${key}', ${idx})" class="secondary" style="min-width: 40px;">❌</button>
+          </div>
+        `).join('')}
+      </div>
+      <button onclick="openCloudinaryWidget('${key}')" style="margin-top: 10px; width: 100%; background: #1976d2;">📤 Upload Image</button>
+    </div>
+    
+    <div id="preview-${key}">
+      ${(stopData.gif_url ? `<img src="${stopData.gif_url}" class="animation-preview" alt="GIF preview">` : '')}
+    </div>
+  `;
+  
+  return div;
+}
+
+// ============================================================
+// CLOUDINARY UPLOAD
+// ============================================================
+function openCloudinaryWidget(stopKey) {
+  cloudinary.openUploadWidget({
+    cloudName: CLOUDINARY_CLOUD_NAME,
+    uploadPreset: CLOUDINARY_UPLOAD_PRESET,
+    folder: 'ghana-lookbook',
+    multiple: true,
+    sources: ['local', 'url', 'camera'],
+    clientAllowedFormats: ['jpg', 'png', 'gif', 'webp']
+  }, (error, result) => {
+    if (!error && result && result.event === 'success') {
+      const url = result.info.secure_url;
+      addImageUrl(stopKey, url);
+    } else if (error) {
+      showMessage(`Upload error: ${error.message}`, 'error');
+    }
+  });
+}
+
+function addImageUrl(stopKey, url) {
+  const container = document.getElementById(`images-${stopKey}`);
+  const input = document.createElement('div');
+  input.style.display = 'flex';
+  input.style.gap = '8px';
+  input.innerHTML = `
+    <input type="text" value="${url}" class="stop-image-input" data-stop="${stopKey}" placeholder="Image URL">
+    <button onclick="removeImageUrl('${stopKey}', this)" class="secondary" style="min-width: 40px;">❌</button>
+  `;
+  container.appendChild(input);
+  showMessage('✅ Image added! Click Save to confirm.', 'success');
+}
+
+function removeImageUrl(stopKey, elem) {
+  if (typeof elem === 'number') {
+    // Remove by index
+    const container = document.getElementById(`images-${stopKey}`);
+    const inputs = container.querySelectorAll('.stop-image-input');
+    inputs[elem].parentElement.remove();
+  } else {
+    // Remove by element
+    elem.parentElement.remove();
+  }
+}
+
+// ============================================================
+// SAVE ANIMATIONS
+// ============================================================
+async function saveAnimations() {
+  const user = auth.currentUser;
+  if (!user) {
+    showMessage('You must be logged in', 'error');
+    return;
+  }
+  
+  try {
+    const data = {
+      selectedAnimation: selectedAnimation,
+      lastUpdated: new Date()
+    };
+    
+    // Collect all stop data
+    Object.keys(STOP_NAMES).forEach(key => {
+      const images = Array.from(document.querySelectorAll(`[data-stop="${key}"][data-idx], [data-stop="${key}"].stop-image-input`))
+        .filter((el, idx) => !el.classList.contains('animation-type-select'))
+        .map(el => el.value.trim())
+        .filter(url => url);
+      
+      const animSelect = document.querySelector(`.animation-type-select[data-stop="${key}"]`);
+      
+      data[key] = {
+        animation_type: animSelect ? animSelect.value : 'carousel',
+        image_urls: images
+      };
+    });
+    
+    await db.collection('lookbook-content').doc('animations').set(data);
+    
+    showMessage('✅ Animations saved! Generate GIFs next.', 'success');
+    setTimeout(() => loadAnimations(), 500);
+  } catch (error) {
+    showMessage(`Error: ${error.message}`, 'error');
+  }
+}
+
+// ============================================================
+// GENERATE GIFs
+// ============================================================
+async function generateGIFs() {
+  const user = auth.currentUser;
+  if (!user) {
+    showMessage('You must be logged in', 'error');
+    return;
+  }
+  
+  try {
+    showMessage('⏳ Generating GIFs... This may take a minute.', 'info');
+    
+    // Get animation data
+    const doc = await db.collection('lookbook-content').doc('animations').get();
+    const data = doc.data() || {};
+    
+    // Call backend function to generate GIFs
+    const response = await fetch('/api/generate-gifs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        animation_data: data,
+        cloudinary_name: CLOUDINARY_CLOUD_NAME
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      // Update Firestore with GIF URLs
+      const updateData = { ...data };
+      Object.entries(result.gifs).forEach(([key, gifUrl]) => {
+        if (updateData[key]) {
+          updateData[key].gif_url = gifUrl;
+        }
+      });
+      
+      await db.collection('lookbook-content').doc('animations').set(updateData);
+      
+      showMessage(`✨ ${Object.keys(result.gifs).length} GIFs generated!`, 'success');
+      setTimeout(() => loadAnimations(), 500);
+    } else {
+      showMessage(`Error: ${result.error}`, 'error');
+    }
+  } catch (error) {
+    showMessage(`Generation error: ${error.message}`, 'error');
+  }
+}
+
+// ============================================================
+// UTILS
+// ============================================================
+function showMessage(text, type) {
+  const el = document.getElementById('message');
+  el.textContent = text;
+  el.className = `message ${type}`;
+  setTimeout(() => el.classList.add('hidden'), 5000);
+}
+
+// Initial load
+document.addEventListener('DOMContentLoaded', () => {
+  // Pre-select carousel
+  selectAnimation('carousel');
+});
+</script>
+
+</body>
+</html>
