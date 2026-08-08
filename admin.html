@@ -386,25 +386,20 @@
 <script src="https://upload-widget.cloudinary.com/latest/index.js"></script>
 
 <script>
-// ============================================================
-// FIREBASE CONFIG
-// ============================================================
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "your-project.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCkFp6EurH8mlCGnwKgXk_BD-fJyO3n2nc",
+  authDomain: "goldcoastlookbook.firebaseapp.com",
+  projectId: "goldcoastlookbook",
+  storageBucket: "goldcoastlookbook.firebasestorage.app",
+  messagingSenderId: "170408390324",
+  appId: "1:170408390324:web:169786de538fe7fdd831e1"
 };
 
-// CLOUDINARY CONFIG
-const CLOUDINARY_CLOUD_NAME = "YOUR_CLOUDINARY_CLOUD_NAME";
-const CLOUDINARY_UPLOAD_PRESET = "YOUR_UPLOAD_PRESET";
 
-// ============================================================
-// ANIMATION TYPES
-// ============================================================
+// CLOUDINARY CONFIG
+const CLOUDINARY_CLOUD_NAME = "ahi5xzz8";
+const CLOUDINARY_UPLOAD_PRESET = "wxlrqjb8";
+
 const ANIMATION_TYPES = {
   carousel: {
     icon: '📽️',
@@ -443,9 +438,6 @@ const STOP_NAMES = {
   food: 'Eat Like a Local'
 };
 
-// ============================================================
-// STATE
-// ============================================================
 let selectedAnimation = 'carousel';
 let currentStopData = {};
 
@@ -453,9 +445,6 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// ============================================================
-// AUTH
-// ============================================================
 auth.onAuthStateChanged(user => {
   if (user) {
     document.getElementById('loginForm').classList.add('hidden');
@@ -491,9 +480,6 @@ function handleLogout() {
   auth.signOut();
 }
 
-// ============================================================
-// ANIMATION SELECTOR
-// ============================================================
 function selectAnimation(type) {
   selectedAnimation = type;
   
@@ -506,9 +492,6 @@ function selectAnimation(type) {
   showMessage(`✨ Selected: ${ANIMATION_TYPES[type].name}`, 'info');
 }
 
-// ============================================================
-// LOAD ANIMATIONS
-// ============================================================
 async function loadAnimations() {
   try {
     const doc = await db.collection('lookbook-content').doc('animations').get();
@@ -542,9 +525,6 @@ async function loadAnimations() {
   }
 }
 
-// ============================================================
-// CREATE STOP CARD
-// ============================================================
 function createStopCard(key, name, stopData) {
   const div = document.createElement('div');
   div.className = 'stop-card';
@@ -580,9 +560,6 @@ function createStopCard(key, name, stopData) {
   return div;
 }
 
-// ============================================================
-// CLOUDINARY UPLOAD
-// ============================================================
 function openCloudinaryWidget(stopKey) {
   cloudinary.openUploadWidget({
     cloudName: CLOUDINARY_CLOUD_NAME,
@@ -626,9 +603,6 @@ function removeImageUrl(stopKey, elem) {
   }
 }
 
-// ============================================================
-// SAVE ANIMATIONS
-// ============================================================
 async function saveAnimations() {
   const user = auth.currentUser;
   if (!user) {
@@ -666,9 +640,6 @@ async function saveAnimations() {
   }
 }
 
-// ============================================================
-// GENERATE GIFs
-// ============================================================
 async function generateGIFs() {
   const user = auth.currentUser;
   if (!user) {
@@ -715,10 +686,7 @@ async function generateGIFs() {
     showMessage(`Generation error: ${error.message}`, 'error');
   }
 }
-
-// ============================================================
-// UTILS
-// ============================================================
+ 
 function showMessage(text, type) {
   const el = document.getElementById('message');
   el.textContent = text;
